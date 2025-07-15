@@ -1,21 +1,21 @@
 require "csv"
 data = Array.new
-CSV.foreach("personal_infomation.csv") do |row|
+CSV.foreach(path="./personal_infomation.csv", headers: true) do |row|
     personal_data = {
-        id: row[0],
-        name: row[1],
-        ruby: row[2],
-        sex: row[3],
-        tel: row[4],
-        mobile: row[5],
-        mail: row[6],
-        zip: row[7],
-        address1: row[8],
-        address2: row[9],
-        address3: row[10],
-        address4: row[11],
-        address5: row[12],
-        birthday: row[13]
+        id: row['no'],
+        name: row['namae'],
+        ruby: row['rubi'],
+        sex: row['seibetu'],
+        tel: row['denwa'],
+        mobile: row['keitai'],
+        mail: row['mair'],
+        zip: row['yuubinbango'],
+        address1: row['jusho1'],
+        address2: row['jusho2'],
+        address3: row['jusho3'],
+        address4: row['jusho4'],
+        address5: row['jusho5'],
+        birthday: row['tanjobi']
     }
     data.push personal_data
 end
