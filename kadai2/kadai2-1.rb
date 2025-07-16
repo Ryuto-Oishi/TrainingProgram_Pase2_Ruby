@@ -2,7 +2,7 @@ require "csv"
 require_relative "./data_analyzer.rb"
 parsed_data = Array.new
 CSV.foreach("./personal_infomation.csv", headers: true) do |row|
-    personal_data = DataAnalyzer.new
+    personal_data = PersonalInformation.new
     personal_data.id = row['no']
     personal_data.name = row['namae']
     personal_data.ruby = row['rubi']
