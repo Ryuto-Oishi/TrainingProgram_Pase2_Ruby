@@ -1,8 +1,8 @@
 require "csv"
-require_relative "./personal_information.rb"
+require_relative "./person.rb"
 parsed_data = Array.new
 CSV.foreach("./personal_infomation.csv", headers: true) do |row|
-    personal_data = PersonalInformation.new
+    personal_data = Person.new
     personal_data.id = row['no']
     personal_data.name = row['namae']
     personal_data.ruby = row['rubi']
