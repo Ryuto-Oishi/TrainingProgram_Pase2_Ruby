@@ -1,8 +1,8 @@
 require "csv"
-require_relative "./class_only.rb"
-data = Array.new
+require_relative "./parsed_data.rb"
+parsed_data = Array.new
 CSV.foreach("./personal_infomation.csv", headers: true) do |row|
-    personal_data = ClassOnly.new
+    personal_data = ParsedData.new
     personal_data.id = row['no']
     personal_data.name = row['namae']
     personal_data.ruby = row['rubi']
@@ -18,8 +18,8 @@ CSV.foreach("./personal_infomation.csv", headers: true) do |row|
     personal_data.address5 = row['jusho5']
     personal_data.birthday = row['tanjobi']
 
-    data.push(personal_data)
+    parsed_data.push(personal_data)
 end
-data.each do |personal_data|
+parsed_data.each do |personal_data|
     p personal_data.name
 end
