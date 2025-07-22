@@ -33,5 +33,5 @@ File.open("./user.json", mode = "w") do |file|
             "age": user.age
         })
     end
-    file.puts(JSON.pretty_generate(json_data), file)
+    file.puts(JSON.pretty_generate(json_data))
 end
