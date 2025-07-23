@@ -1,4 +1,5 @@
 require "csv"
+require "json"
 require_relative "./user.rb"
 users = Array.new
 CSV.foreach("./personal_infomation.csv", headers: true) do |row|
@@ -21,20 +22,42 @@ CSV.foreach("./personal_infomation.csv", headers: true) do |row|
     users.push(personal_data)
 end
 
-age_data_by_prefectures = Hash.new
+# age_by_prefectures = Hash.new
+# users.each do |user|
+#     prefecture = user.address1
+#     if age_by_prefectures[prefecture.to_sym]
+#         age_by_prefectures[prefecture.to_sym].push(user.age)
+#     else
+#         age_by_prefectures[prefecture.to_sym] = Array.new([user.age])
+#     end
+# end
+
+
+# ハッシュだけを用いた方法
+age_by_prefectures = Hash.new
 users.each do |user|
     prefecture = user.address1
-    if age_data_by_prefectures[prefecture.to_sym]
-        age_data_by_prefectures[prefecture.to_sym].push(user.age)
+    name = user.name
+    if age_by_prefectures[prefecture.to_sym]
+        age_by_prefectures[prefecture.to_sym][name.to_sym] = user.age
     else
-        age_data_by_prefectures[prefecture.to_sym] = Array.new([user.age])
+        age_by_prefectures[prefecture.to_sym] = Hash.new({name.to_sym => user.age})
     end
 end
+# puts JSON.pretty_generate(age_by_prefectures)
+
+
 
 CSV.open("./average_age.csv", "w") do |csv|
     csv.puts(["prefecture", "average age"])
-    age_data_by_prefectures.each do |key, value|
-        age_data_by_prefectures[key] = age_data_by_prefectures[key].sum/age_data_by_prefectures[key].length
-        csv.puts([key.to_s, age_data_by_prefectures[key].to_s])
+    age_by_prefectures.each do |key, value|
+        total_age = 0
+        count = 0
+        age_by_prefectures[key].each do |key, value|
+            total_age = total_age + value
+            count = count + 1
+        end
+        age_by_prefectures[key][:average_age] = total_age/count
+        csv.puts([key.to_s, age_by_prefectures[key][:average_age].to_s])
     end
 end
