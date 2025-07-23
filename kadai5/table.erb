@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>title</title>
+</head>
+<body>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>ruby</th>
+                <th>sex</th>
+                <th>tel</th>
+                <th>mobile</th>
+                <th>mail</th>
+                <th>zip</th>
+                <th>address1</th>
+                <th>address2</th>
+                <th>address3</th>
+                <th>address4</th>
+                <th>address5</th>
+                <th>birthday</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% users.each do |user| %>
+                <tr>
+                    <td><%= user.id %></td>
+                    <td><%= user.name %></td>
+                    <td><%= user.ruby %></td>
+                    <td><%= user.sex %></td>
+                    <td><%= user.tel %></td>
+                    <td><%= user.mobile %></td>
+                    <td><%= user.mail %></td>
+                    <td><%= user.zip %></td>
+                    <td><%= user.address1 %></td>
+                    <td><%= user.address2 %></td>
+                    <td><%= user.address3 %></td>
+                    <td><%= user.address4 %></td>
+                    <td><%= user.address5 %></td>
+                    <td><%= user.birthday %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</body>
+</html>
+
