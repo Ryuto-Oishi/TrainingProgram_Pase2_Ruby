@@ -22,7 +22,6 @@ CSV.foreach("./personal_infomation.csv", headers: true) do |row|
     users.push(personal_data)
 end
 
-users = users
 template = File.read("table.erb")
 File.open("./table.html", "w") do |file|
     file.puts(ERB.new(template).result(binding))
