@@ -20,7 +20,8 @@ CSV.foreach("./personal_infomation.csv", headers: true) do |row|
 
     begin
         personal_data.birthday = row['tanjobi']
-    rescue AgeError
+    rescue AgeError => e
+        puts "#{e.message}(#{personal_data.name})"
     end
     
     users.push(personal_data)
