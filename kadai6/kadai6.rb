@@ -1,9 +1,7 @@
 require "csv"
-require "json"
 require_relative "./user.rb"
 require_relative "./age_error.rb"
 users = Array.new
-minor_users = Array.new
 CSV.foreach("./personal_infomation.csv", headers: true) do |row|
     personal_data = User.new
     personal_data.id = row['no']
@@ -23,7 +21,6 @@ CSV.foreach("./personal_infomation.csv", headers: true) do |row|
     begin
         personal_data.birthday = row['tanjobi']
     rescue AgeError
-        minor_users.push(personal_data)
     end
     
     users.push(personal_data)
