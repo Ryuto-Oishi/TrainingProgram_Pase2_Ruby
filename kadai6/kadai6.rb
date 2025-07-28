@@ -1,6 +1,5 @@
 require "csv"
 require_relative "./user.rb"
-require_relative "./age_error.rb"
 users = Array.new
 CSV.foreach("./personal_infomation.csv", headers: true) do |row|
     personal_data = User.new
@@ -17,13 +16,13 @@ CSV.foreach("./personal_infomation.csv", headers: true) do |row|
     personal_data.address3 = row['jusho3']
     personal_data.address4 = row['jusho4']
     personal_data.address5 = row['jusho5']
-
+    personal_data.birthday = row['tanjobi']
     begin
-        personal_data.birthday = row['tanjobi']
-    rescue AgeError => e
+        personal_data.check_age(personal_data.age)
+    rescue => e
         puts "#{e.message}(#{personal_data.name})"
     end
     
     users.push(personal_data)
 end
-
+puts "処理完了"

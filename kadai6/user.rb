@@ -12,10 +12,16 @@ class User
         @age = ((today.strftime('%Y%m%d').to_f - birthday.strftime('%Y%m%d').to_f) / 10000).to_i
     end
 
-    def birthday=(text)
-        @birthday = text
-        if self.age < 18
-            raise AgeError.new("エラー：18歳未満のデータが挿入されました")
+    def check_age(age)
+        if age < 18
+            raise MinorUserError.new("エラー：18歳未満のデータが挿入されました")
         end
+    end
+
+end
+
+class MinorUserError < StandardError
+    def initialize(message)
+        super(message)
     end
 end
