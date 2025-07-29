@@ -21,8 +21,9 @@ CSV.foreach("./personal_infomation.csv", headers: true) do |row|
         personal_data.check_age(personal_data.age)
     rescue => e
         puts "#{e.message}(#{personal_data.name})"
+        # 未成年を含まない場合
+        # next
     end
-    
     users.push(personal_data)
 end
 puts "処理完了"
